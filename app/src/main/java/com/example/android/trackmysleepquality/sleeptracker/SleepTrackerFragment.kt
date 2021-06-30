@@ -63,7 +63,8 @@ class SleepTrackerFragment : Fragment() {
 
         viewModel.nights.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.data = it
+                //submitList is used to notify the RecyclerView any change.
+                adapter.submitList(it)
             }
         })
 
