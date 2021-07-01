@@ -57,6 +57,17 @@ class SleepTrackerFragment : Fragment() {
         binding.myViewModel = viewModel
         binding.lifecycleOwner = this
 
+        val adapter = SleepNightAdapter()
+
+        binding.sleepList.adapter = adapter
+
+        viewModel.nights.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                //submitList is used to notify the RecyclerView any change.
+                adapter.submitList(it)
+            }
+        })
+
         //Entender (?): Navegar para próximo fragmento e atribuir nulo para objeto Sleep Night
         viewModel.navigateToSleepQuality.observe(viewLifecycleOwner, Observer {
             night ->
